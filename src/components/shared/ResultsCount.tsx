@@ -1,3 +1,7 @@
 export default function ResultsCount() {
-  return <div>ResultsCount</div>;
+  return (
+    <p className='count'>
+      <span className='u-bold'>0</span> results
+    </p>
+  );
 }
