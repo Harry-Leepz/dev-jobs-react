@@ -1,3 +1,3 @@
 export default function Logo() {
-  return <div>Logo</div>;
+  return <h1 className='main-heading'>Developer Jobs</h1>;
 }
