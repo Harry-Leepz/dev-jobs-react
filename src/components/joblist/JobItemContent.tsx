@@ -91,3 +91,18 @@ export default function JobItemContent() {
     </section>
   );
 }
+
+export function EmptyJobContent() {
+  return (
+    <section className='job-details'>
+      <div>
+        <div className='job-details__start-view'>
+          <p>What are you looking for ?</p>
+          <p>
+            Start by searchingfor any technology you ideally want to work with.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
