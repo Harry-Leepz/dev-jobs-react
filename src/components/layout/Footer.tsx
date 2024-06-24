@@ -2,7 +2,10 @@ export default function Footer() {
   return (
     <footer className='footer'>
       <small>
-        <p> Intended solely for educational purposes</p>
+        <p>
+          Intended solely for
+          <span className='u-bold'> educational purposes</span>
+        </p>
       </small>
 
       <p>
