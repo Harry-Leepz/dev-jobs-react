@@ -77,6 +77,13 @@ body::-webkit-scrollbar {
 }
 
 /* HEADINGS */
+
+.main-heading {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+}
+
 .first-heading {
   font-size: 31px;
   font-weight: 400;
@@ -113,7 +120,7 @@ body::-webkit-scrollbar {
   left: 0;
   z-index: -2;
   overflow: hidden;
-  background-image: linear-gradient(125deg, #1f74f1 -10%, #0850b9 100%);
+  background-image: linear-gradient(125deg, #384353 -10%, #041124 100%);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -182,14 +189,6 @@ body::-webkit-scrollbar {
 }
 
 /* LOGO */
-.logo {
-  margin-left: -8px;
-  user-select: none;
-}
-
-.logo__img {
-  margin-bottom: -5px;
-}
 
 /* BOOKMARKS BTN */
 .bookmarks-btn {
@@ -947,7 +946,7 @@ body::-webkit-scrollbar {
 /* COPYRIGHT */
 .footer > small {
   font-size: 11px;
-  max-width: 200px;
+  max-width: 220px;
 }
 
 .footer > small *::selection {
