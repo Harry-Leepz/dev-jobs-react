@@ -1,7 +1,15 @@
+import Background from "./layout/Background";
+import Container from "./layout/Container";
+import Footer from "./layout/Footer";
+import Header from "./layout/Header";
+
 function App() {
   return (
     <>
-      <h1>Hello world</h1>
+      <Background />
+      <Header />
+      <Container />
+      <Footer />
     </>
   );
 }
