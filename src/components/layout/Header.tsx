@@ -1,5 +1,6 @@
 import BookmarksButton from "../bookmarks/BookmarksButton";
 import Logo from "../shared/Logo";
+import SearchForm from "../shared/SearchForm";
 
 export default function Header() {
   return (
@@ -8,6 +9,7 @@ export default function Header() {
         <Logo />
         <BookmarksButton />
       </div>
+      <SearchForm />
     </header>
   );
 }
