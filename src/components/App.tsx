@@ -19,6 +19,7 @@ import { BASE_API_URL } from "../lib/constants";
 function App() {
   const [searchText, setSearchText] = useState("");
   const [jobItems, setJobItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,10 +33,11 @@ function App() {
     if (!searchText) return;
 
     const fetchJobs = async () => {
+      setIsLoading(true);
       const response = await fetch(`${BASE_API_URL}?search=${searchText}`);
       const data = await response.json();
       setJobItems(data.jobItems);
-      console.log(data);
+      setIsLoading(false);
     };
     fetchJobs();
   }, [searchText]);
@@ -60,7 +62,7 @@ function App() {
             <ResultsCount />
             <SortingControls />
           </SidebarTop>
-          <JobList jobItems={jobItems} />
+          <JobList jobItems={jobItems} isLoading={isLoading} />
           <PaginationControls />
         </Sidebar>
         <JobItemContent />
