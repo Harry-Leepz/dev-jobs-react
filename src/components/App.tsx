@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+import useFetchJobs from "../hooks/useFetchJobs";
 
 import Background from "./layout/Background";
 import Container from "./layout/Container";
@@ -14,12 +16,9 @@ import PaginationControls from "./shared/PaginationControls";
 import ResultsCount from "./shared/ResultsCount";
 import SortingControls from "./shared/SortingControls";
 
-import { BASE_API_URL } from "../lib/constants";
-
 function App() {
   const [searchText, setSearchText] = useState("");
-  const [jobItems, setJobItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const { jobItems, isLoading } = useFetchJobs(searchText);
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,19 +27,6 @@ function App() {
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
-
-  useEffect(() => {
-    if (!searchText) return;
-
-    const fetchJobs = async () => {
-      setIsLoading(true);
-      const response = await fetch(`${BASE_API_URL}?search=${searchText}`);
-      const data = await response.json();
-      setJobItems(data.jobItems);
-      setIsLoading(false);
-    };
-    fetchJobs();
-  }, [searchText]);
 
   return (
     <>
