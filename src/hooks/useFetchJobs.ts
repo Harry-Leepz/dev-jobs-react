@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+
 import { BASE_API_URL } from "../lib/constants";
+import { TJobItem } from "../lib/types";
 
 /*
   The useFetchJobs hook is responsible for fetching job items from the API.
@@ -7,7 +9,7 @@ import { BASE_API_URL } from "../lib/constants";
 */
 
 export default function useFetchJobs(searchText: string) {
-  const [jobItems, setJobItems] = useState([]);
+  const [jobItems, setJobItems] = useState<TJobItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const jobItemsSliced = jobItems.slice(0, 7);
