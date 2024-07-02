@@ -343,11 +343,11 @@ body::-webkit-scrollbar {
 }
 
 .job-item:hover {
-  background-color: #f4f5f7;
+  background-color: #c0d5ff;
 }
 
 .job-item--active {
-  background-color: #f4f5f7;
+  background-color: #e9f0ff;
 }
 
 .job-item__link {
