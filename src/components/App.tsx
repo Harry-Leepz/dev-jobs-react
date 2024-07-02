@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import useFetchJobs from "../hooks/useFetchJobs";
+import useDebounce from "../hooks/useDebounce";
 
 import Background from "./layout/Background";
 import Container from "./layout/Container";
@@ -18,8 +19,9 @@ import SortingControls from "./shared/SortingControls";
 
 function App() {
   const [searchText, setSearchText] = useState("");
+  const debouncedSearchText = useDebounce(searchText);
   const { jobItemsSliced, isLoading, totalNumberOfresults } =
-    useFetchJobs(searchText);
+    useFetchJobs(debouncedSearchText);
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
