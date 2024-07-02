@@ -2,10 +2,15 @@ import { BookmarkIcon } from "@radix-ui/react-icons";
 
 import useActiveId from "../../hooks/useActiveId";
 import useFetchJobDetails from "../../hooks/useFetchJobDetails";
+import Spinner from "../shared/Spinner";
 
 export default function JobItemContent() {
   const activeId = useActiveId();
-  const jobDetails = useFetchJobDetails(activeId);
+  const [jobDetails, isLoading] = useFetchJobDetails(activeId);
+
+  if (isLoading) {
+    return <LoadingJobContent />;
+  }
 
   if (!jobDetails) {
     return <EmptyJobContent />;
@@ -110,6 +115,16 @@ export default function JobItemContent() {
             it!
           </p>
         </footer>
+      </div>
+    </section>
+  );
+}
+
+export function LoadingJobContent() {
+  return (
+    <section className='job-details'>
+      <div>
+        <Spinner />
       </div>
     </section>
   );
