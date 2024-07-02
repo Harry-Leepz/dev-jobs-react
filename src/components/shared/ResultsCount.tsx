@@ -1,7 +1,11 @@
-export default function ResultsCount() {
+type ResultsCountProps = {
+  results: number;
+};
+
+export default function ResultsCount({ results }: ResultsCountProps) {
   return (
     <p className='count'>
-      <span className='u-bold'>0</span> results
+      <span className='u-bold'>{results}</span> results
     </p>
   );
 }

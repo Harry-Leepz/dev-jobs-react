@@ -18,7 +18,8 @@ import SortingControls from "./shared/SortingControls";
 
 function App() {
   const [searchText, setSearchText] = useState("");
-  const { jobItemsSliced, isLoading } = useFetchJobs(searchText);
+  const { jobItemsSliced, isLoading, totalNumberOfresults } =
+    useFetchJobs(searchText);
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,7 +46,7 @@ function App() {
       <Container>
         <Sidebar>
           <SidebarTop>
-            <ResultsCount />
+            <ResultsCount results={totalNumberOfresults} />
             <SortingControls />
           </SidebarTop>
           <JobList jobItems={jobItemsSliced} isLoading={isLoading} />

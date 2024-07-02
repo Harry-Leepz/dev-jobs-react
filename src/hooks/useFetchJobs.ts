@@ -13,6 +13,7 @@ export default function useFetchJobs(searchText: string) {
   const [isLoading, setIsLoading] = useState(false);
 
   const jobItemsSliced = jobItems.slice(0, 7);
+  const totalNumberOfresults = jobItems.length;
 
   useEffect(() => {
     if (!searchText) return;
@@ -27,5 +28,5 @@ export default function useFetchJobs(searchText: string) {
     fetchJobs();
   }, [searchText]);
 
-  return { jobItemsSliced, isLoading };
+  return { jobItemsSliced, isLoading, totalNumberOfresults };
 }

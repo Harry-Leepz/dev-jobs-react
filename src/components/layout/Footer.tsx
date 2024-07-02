@@ -9,7 +9,7 @@ export default function Footer() {
       </small>
 
       <p>
-        <span className='u-bold'>0</span> total jobs available
+        <span className='u-bold'>10345</span> total jobs available
       </p>
     </footer>
   );
