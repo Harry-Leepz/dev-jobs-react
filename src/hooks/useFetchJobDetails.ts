@@ -15,6 +15,10 @@ type JobDetailsApiresponse = {
 
 const fetchJobDetails = async (id: number): Promise<JobDetailsApiresponse> => {
   const response = await fetch(`${BASE_API_URL}/${id}`);
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.description);
+  }
   const data = await response.json();
   return data;
 };
@@ -28,7 +32,7 @@ export default function useFetchJobDetails(id: number | null) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: Boolean(id), // only fetch when id is truthy
-      onError: () => {},
+      onError: (error) => console.log(error),
     }
   );
   const jobDetails = data?.jobItem;
