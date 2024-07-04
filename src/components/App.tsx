@@ -22,8 +22,8 @@ function App() {
   const debouncedSearchText = useDebounce(searchText);
   const { jobItems, isLoading } = useFetchJobs(debouncedSearchText);
 
-  const jobItemsSliced = jobItems.slice(0, 7);
-  const totalNumberOfresults = jobItems.length;
+  const jobItemsSliced = jobItems?.slice(0, 7) || [];
+  const totalNumberOfresults = jobItems?.length || 0;
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
