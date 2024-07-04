@@ -12,9 +12,6 @@ export default function useFetchJobs(searchText: string) {
   const [jobItems, setJobItems] = useState<TJobItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const jobItemsSliced = jobItems.slice(0, 7);
-  const totalNumberOfresults = jobItems.length;
-
   useEffect(() => {
     if (!searchText) return;
 
@@ -28,5 +25,5 @@ export default function useFetchJobs(searchText: string) {
     fetchJobs();
   }, [searchText]);
 
-  return { jobItemsSliced, isLoading, totalNumberOfresults };
+  return { jobItems, isLoading};
 }

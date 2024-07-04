@@ -20,8 +20,10 @@ import SortingControls from "./shared/SortingControls";
 function App() {
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText);
-  const { jobItemsSliced, isLoading, totalNumberOfresults } =
-    useFetchJobs(debouncedSearchText);
+  const { jobItems, isLoading } = useFetchJobs(debouncedSearchText);
+
+  const jobItemsSliced = jobItems.slice(0, 7);
+  const totalNumberOfresults = jobItems.length;
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
