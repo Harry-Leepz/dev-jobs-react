@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { BASE_API_URL } from "../lib/constants";
 import { TJobItem } from "../lib/types";
+import { handleError } from "../lib/utils";
 
 type fetchJobsApiResponse = {
   public: boolean;
@@ -36,7 +37,7 @@ export default function useFetchJobs(searchText: string) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: Boolean(searchText), // only fetch when id is truthy
-      onError: (error) => console.log(error),
+      onError: handleError,
     }
   );
 

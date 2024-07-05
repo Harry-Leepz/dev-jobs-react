@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { BASE_API_URL } from "../lib/constants";
 import { TJobDetails } from "../lib/types";
+import { handleError } from "../lib/utils";
 
 type JobDetailsApiresponse = {
   public: boolean;
@@ -32,7 +33,7 @@ export default function useFetchJobDetails(id: number | null) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: Boolean(id), // only fetch when id is truthy
-      onError: (error) => console.log(error),
+      onError: handleError,
     }
   );
   const jobDetails = data?.jobItem;
