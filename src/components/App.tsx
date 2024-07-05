@@ -16,6 +16,7 @@ import JobList from "./joblist/JobList";
 import PaginationControls from "./shared/PaginationControls";
 import ResultsCount from "./shared/ResultsCount";
 import SortingControls from "./shared/SortingControls";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [searchText, setSearchText] = useState("");
@@ -59,6 +60,8 @@ function App() {
         <JobItemContent />
       </Container>
       <Footer />
+
+      <Toaster position='top-right' reverseOrder={false} />
     </>
   );
 }
