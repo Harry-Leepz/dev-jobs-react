@@ -22,6 +22,8 @@ function App() {
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText);
   const { jobItems, isLoading } = useFetchJobs(debouncedSearchText);
+  const [currentPage, setCurrentPage] = useState(1);
+  console.log(currentPage);
 
   const jobItemsSliced = jobItems?.slice(0, 7) || [];
   const totalNumberOfresults = jobItems?.length || 0;
@@ -32,6 +34,14 @@ function App() {
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
+  };
+
+  const onPageChangeHandler = (directon: "next" | "previous") => {
+    if (directon === "next") {
+      setCurrentPage((prev) => prev + 1);
+    } else if (directon === "previous") {
+      setCurrentPage((prev) => prev - 1);
+    }
   };
 
   return (
@@ -55,7 +65,10 @@ function App() {
             <SortingControls />
           </SidebarTop>
           <JobList jobItems={jobItemsSliced} isLoading={isLoading} />
-          <PaginationControls />
+          <PaginationControls
+            onClick={onPageChangeHandler}
+            currentPage={currentPage}
+          />
         </Sidebar>
         <JobItemContent />
       </Container>
