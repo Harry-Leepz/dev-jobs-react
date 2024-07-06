@@ -18,19 +18,21 @@ import ResultsCount from "./shared/ResultsCount";
 import SortingControls from "./shared/SortingControls";
 import { Toaster } from "react-hot-toast";
 
+import { RESULTS_PER_PAGE } from "../lib/constants";
+
 function App() {
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText);
   const { jobItems, isLoading } = useFetchJobs(debouncedSearchText);
   const [currentPage, setCurrentPage] = useState(1);
-  console.log(currentPage);
 
-  const jobItemsSliced = jobItems?.slice(0, 7) || [];
+  const jobItemsSliced =
+    jobItems?.slice(
+      currentPage * RESULTS_PER_PAGE - RESULTS_PER_PAGE,
+      currentPage * RESULTS_PER_PAGE
+    ) || [];
   const totalNumberOfresults = jobItems?.length || 0;
-
-  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
+  const totalNumberOfPages = totalNumberOfresults / RESULTS_PER_PAGE;
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
@@ -52,11 +54,7 @@ function App() {
           <Logo />
           <BookmarksButton />
         </HeaderTop>
-        <SearchForm
-          searchText={searchText}
-          onSubmitHandler={onSubmitHandler}
-          onChangeHandler={onChangeHandler}
-        />
+        <SearchForm searchText={searchText} onChangeHandler={onChangeHandler} />
       </Header>
       <Container>
         <Sidebar>
@@ -66,6 +64,7 @@ function App() {
           </SidebarTop>
           <JobList jobItems={jobItemsSliced} isLoading={isLoading} />
           <PaginationControls
+            totalNumberOfPages={totalNumberOfPages}
             onClick={onPageChangeHandler}
             currentPage={currentPage}
           />
