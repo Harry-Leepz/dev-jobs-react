@@ -137,7 +137,7 @@ export function EmptyJobContent() {
         <div className='job-details__start-view'>
           <p>What are you looking for ?</p>
           <p>
-            Start by searchingfor any technology you ideally want to work with.
+            Start by searching for any technology you ideally want to work with.
           </p>
         </div>
       </div>
