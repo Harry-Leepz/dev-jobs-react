@@ -44,9 +44,18 @@ function PaginationControlButton({
   onClick,
   currentPage,
 }: PaginationControlButtonProps) {
+  const onClickHandler = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    direction: "next" | "previous"
+  ) => {
+    // remove blur effect once clicked
+    onClick(direction);
+    event.currentTarget.blur();
+  };
+
   return (
     <button
-      onClick={() => onClick(direction)}
+      onClick={(e) => onClickHandler(e, direction)}
       className={`pagination__button pagination__button--${direction}`}
     >
       {direction === "previous" && (
