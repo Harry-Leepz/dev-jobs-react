@@ -28,7 +28,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<TSortingOption>("relevant");
 
-  const jobItemsSorted = jobItems?.sort((a, b) => {
+  const jobItemsSorted = [...(jobItems || [])].sort((a, b) => {
     if (sortBy === "relevant") {
       return b.relevanceScore - a.relevanceScore;
     } else {
