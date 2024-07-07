@@ -1,7 +1,9 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 
+import { TPageDirection } from "../../lib/types";
+
 type PaginationControlsProps = {
-  onClick: (direction: "next" | "previous") => void;
+  onClick: (direction: TPageDirection) => void;
   currentPage: number;
   totalNumberOfPages: number;
 };
@@ -34,8 +36,8 @@ export default function PaginationControls({
 // ------------------------------------------------------------
 
 type PaginationControlButtonProps = {
-  direction: "next" | "previous";
-  onClick: (direction: "next" | "previous") => void;
+  direction: TPageDirection;
+  onClick: (direction: TPageDirection) => void;
   currentPage: number;
 };
 
@@ -46,7 +48,7 @@ function PaginationControlButton({
 }: PaginationControlButtonProps) {
   const onClickHandler = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    direction: "next" | "previous"
+    direction: TPageDirection
   ) => {
     // remove blur effect once clicked
     onClick(direction);
