@@ -19,15 +19,24 @@ import SortingControls from "./shared/SortingControls";
 import { Toaster } from "react-hot-toast";
 
 import { RESULTS_PER_PAGE } from "../lib/constants";
+import { TSortingOption, TPageDirection } from "../lib/types";
 
 function App() {
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText);
   const { jobItems, isLoading } = useFetchJobs(debouncedSearchText);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState<TSortingOption>("relevant");
 
+  const jobItemsSorted = jobItems?.sort((a, b) => {
+    if (sortBy === "relevant") {
+      return b.relevanceScore - a.relevanceScore;
+    } else {
+      return a.daysAgo - b.daysAgo;
+    }
+  });
   const jobItemsSliced =
-    jobItems?.slice(
+    jobItemsSorted?.slice(
       currentPage * RESULTS_PER_PAGE - RESULTS_PER_PAGE,
       currentPage * RESULTS_PER_PAGE
     ) || [];
@@ -38,12 +47,17 @@ function App() {
     setSearchText(event.target.value);
   };
 
-  const onPageChangeHandler = (directon: "next" | "previous") => {
+  const onPageChangeHandler = (directon: TPageDirection) => {
     if (directon === "next") {
       setCurrentPage((prev) => prev + 1);
     } else if (directon === "previous") {
       setCurrentPage((prev) => prev - 1);
     }
+  };
+
+  const onSortByChangeHandler = (newSortByOption: TSortingOption) => {
+    setCurrentPage(1);
+    setSortBy(newSortByOption);
   };
 
   return (
@@ -60,7 +74,7 @@ function App() {
         <Sidebar>
           <SidebarTop>
             <ResultsCount results={totalNumberOfresults} />
-            <SortingControls />
+            <SortingControls sortBy={sortBy} onClick={onSortByChangeHandler} />
           </SidebarTop>
           <JobList jobItems={jobItemsSliced} isLoading={isLoading} />
           <PaginationControls
