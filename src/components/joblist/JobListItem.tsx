@@ -1,4 +1,4 @@
-import { BookmarkIcon } from "@radix-ui/react-icons";
+import BookmarkIcon from "../bookmarks/BookmarkIcon";
 
 import { TJobItem } from "../../lib/types";
 
