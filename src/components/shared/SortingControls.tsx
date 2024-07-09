@@ -2,7 +2,7 @@ import { TSortingOption } from "../../lib/types";
 
 type SortingControlsProps = {
   onClick: (newSortByOption: TSortingOption) => void;
-  sortBy: string;
+  sortBy: TSortingOption;
 };
 
 export default function SortingControls({
