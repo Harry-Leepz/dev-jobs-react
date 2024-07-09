@@ -1,8 +1,8 @@
-import { BookmarkIcon } from "@radix-ui/react-icons";
+import BookmarkIcon from "../bookmarks/BookmarkIcon";
+import Spinner from "../shared/Spinner";
 
 import useActiveId from "../../hooks/useActiveId";
 import useFetchJobDetails from "../../hooks/useFetchJobDetails";
-import Spinner from "../shared/Spinner";
 
 export default function JobItemContent() {
   const activeId = useActiveId();
@@ -28,6 +28,7 @@ export default function JobItemContent() {
     location,
     daysAgo,
     coverImgURL,
+    id,
   } = jobDetails;
 
   return (
@@ -49,7 +50,7 @@ export default function JobItemContent() {
             <div className='job-info__below-badge'>
               <time className='job-info__time'>{daysAgo}d</time>
 
-              <BookmarkIcon />
+              <BookmarkIcon id={id} />
             </div>
           </div>
 
