@@ -1,13 +1,12 @@
-import { useContext } from "react";
-import { BookmarksContext } from "../../contexts/bookmarks/BookmarksContextProvider";
 import { BookmarkFilledIcon } from "@radix-ui/react-icons";
+import { useBookmarksContext } from "../../hooks/useContextProviders";
 
 type BookmarkIconProps = {
   id: number;
 };
 
 export default function BookmarkIcon({ id }: BookmarkIconProps) {
-  const { bookmarkedIds, toggleBookmarkHandler } = useContext(BookmarksContext);
+  const { bookmarkedIds, toggleBookmarkHandler } = useBookmarksContext();
 
   const preventDefault = (e: React.MouseEvent) => {
     toggleBookmarkHandler(id);
