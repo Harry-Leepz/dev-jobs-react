@@ -15,7 +15,9 @@ type fetchJobsApiResponse = {
   It takes a searchText parameter and returns jobItems and isLoading.
 */
 
-const fetchJobs = async (searchText: string): Promise<fetchJobsApiResponse> => {
+const fetchJobsBySearchQuery = async (
+  searchText: string
+): Promise<fetchJobsApiResponse> => {
   if (searchText.trim() === "") {
     return { public: false, sorted: false, jobItems: [] };
   }
@@ -28,10 +30,10 @@ const fetchJobs = async (searchText: string): Promise<fetchJobsApiResponse> => {
   return data;
 };
 
-export default function useFetchJobs(searchText: string) {
+export default function useSearchQuery(searchText: string) {
   const { data, isInitialLoading } = useQuery(
     ["jobs", searchText],
-    () => (searchText ? fetchJobs(searchText) : null),
+    () => (searchText ? fetchJobsBySearchQuery(searchText) : null),
     {
       staleTime: 1000 * 60 * 60, // 1 hour
       refetchOnWindowFocus: false,

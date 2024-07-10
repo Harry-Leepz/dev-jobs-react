@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import useFetchJobs from "../hooks/useFetchJobs";
+import useSearchQuery from "../hooks/useSearchQuery";
 import useDebounce from "../hooks/useDebounce";
 
 import Background from "./layout/Background";
@@ -24,7 +24,7 @@ import { TSortingOption, TPageDirection } from "../lib/types";
 function App() {
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText);
-  const { jobItems, isLoading } = useFetchJobs(debouncedSearchText);
+  const { jobItems, isLoading } = useSearchQuery(debouncedSearchText);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<TSortingOption>("relevant");
 
