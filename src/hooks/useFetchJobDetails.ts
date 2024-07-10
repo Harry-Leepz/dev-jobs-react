@@ -14,7 +14,9 @@ type JobDetailsApiresponse = {
   It takes an id parameter and returns jobDetails and loading.
 */
 
-const fetchJobDetails = async (id: number): Promise<JobDetailsApiresponse> => {
+export const fetchJobItem = async (
+  id: number
+): Promise<JobDetailsApiresponse> => {
   const response = await fetch(`${BASE_API_URL}/${id}`);
   if (!response.ok) {
     const error = await response.json();
@@ -26,8 +28,8 @@ const fetchJobDetails = async (id: number): Promise<JobDetailsApiresponse> => {
 
 export default function useFetchJobDetails(id: number | null) {
   const { data, isInitialLoading } = useQuery(
-    ["jobDetails", id],
-    () => (id ? fetchJobDetails(id) : null),
+    ["job-item", id],
+    () => (id ? fetchJobItem(id) : null),
     {
       staleTime: 1000 * 60 * 60, // 1 hour
       refetchOnWindowFocus: false,
