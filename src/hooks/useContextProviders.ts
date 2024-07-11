@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { BookmarksContext } from "../contexts/bookmarks/BookmarksContextProvider";
 import { ActiveIdContext } from "../contexts/activeId/ActiveIdContextProvider";
 import { SearchContext } from "../contexts/search/SearchTextContextProvider";
+import { JobDataContext } from "../contexts/jobData/JobDataContextProvider";
 
 /*
   The useBookmarksContext hook is responsible for getting the bookmarks context.
@@ -44,6 +45,21 @@ export const useSearchTextContext = () => {
   if (!context) {
     throw new Error(
       "useSearchTextContext must be used within a SearchTextContextProvider"
+    );
+  }
+  return context;
+};
+
+/*
+  The useJobDataContext hook is responsible for getting the job data context.
+  It returns the job data context.
+*/
+
+export const useJobDataContext = () => {
+  const context = useContext(JobDataContext);
+  if (!context) {
+    throw new Error(
+      "useJobDataContext must be used within a JobDataContextProvider"
     );
   }
   return context;
