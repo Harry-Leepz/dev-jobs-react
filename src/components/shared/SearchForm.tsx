@@ -1,14 +1,13 @@
-type SearchFormProps = {
-  searchText: string;
-  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+import { useSearchTextContext } from "../../hooks/useContextProviders";
 
-export default function SearchForm({
-  searchText,
-  onChangeHandler,
-}: SearchFormProps) {
+export default function SearchForm() {
+  const { onSearchTextChange, searchText } = useSearchTextContext();
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+  };
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onSearchTextChange(event.target.value);
   };
 
   return (
