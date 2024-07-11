@@ -8,7 +8,10 @@ import { RESULTS_PER_PAGE } from "../../lib/constants";
 
 type JobDataContextType = {
   isLoading: boolean;
+  currentPage: number;
+  sortBy: TSortingOption;
   jobItemsSliced: TJobItem[];
+  totalNumberOfresults: number;
   totalNumberOfPages: number;
   onPageChangeHandler: (direction: TPageDirection) => void;
   onSortByChangeHandler: (newSortByOption: TSortingOption) => void;
@@ -60,8 +63,11 @@ export default function JobDataContextProvider({
   return (
     <JobDataContext.Provider
       value={{
+        currentPage,
+        sortBy,
         isLoading,
         jobItemsSliced,
+        totalNumberOfresults,
         totalNumberOfPages,
         onPageChangeHandler,
         onSortByChangeHandler,
