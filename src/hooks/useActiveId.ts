@@ -10,8 +10,8 @@ export default function useActiveId() {
 
   useEffect(() => {
     const handleHashChange = () => {
-      const id = window.location.hash.slice(1);
-      setActiveId(id ? parseInt(id) : null);
+      const id = Number(window.location.hash.slice(1));
+      setActiveId(id);
     };
     handleHashChange();
 
