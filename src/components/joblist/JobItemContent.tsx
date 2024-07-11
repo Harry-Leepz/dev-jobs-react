@@ -1,11 +1,11 @@
 import BookmarkIcon from "../bookmarks/BookmarkIcon";
 import Spinner from "../shared/Spinner";
 
-import useActiveId from "../../hooks/useActiveId";
 import useFetchJobDetails from "../../hooks/useFetchJobDetails";
+import { useActiveIdContext } from "../../hooks/useContextProviders";
 
 export default function JobItemContent() {
-  const activeId = useActiveId();
+  const { activeId } = useActiveIdContext();
   const { jobDetails, isLoading } = useFetchJobDetails(activeId);
 
   if (isLoading) {
