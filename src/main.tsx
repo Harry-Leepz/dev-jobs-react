@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import BookmarksContextProvider from "./contexts/bookmarks/BookmarksContextProvider.tsx";
 import ActiveIdContextProvider from "./contexts/activeId/ActiveIdContextProvider.tsx";
 import SearchTextContextProvider from "./contexts/search/SearchTextContextProvider.tsx";
+import JobDataContextProvider from "./contexts/jobData/JobDataContextProvider.tsx";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <ActiveIdContextProvider>
         <BookmarksContextProvider>
           <SearchTextContextProvider>
-            <App />
+            <JobDataContextProvider>
+              <App />
+            </JobDataContextProvider>
           </SearchTextContextProvider>
         </BookmarksContextProvider>
       </ActiveIdContextProvider>
