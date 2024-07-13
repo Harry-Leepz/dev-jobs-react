@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
 
 import { useSearchTextContext } from "../../hooks/useContextProviders";
 import useSearchQuery from "../../hooks/useSearchQuery";
@@ -55,31 +55,46 @@ export default function JobDataContextProvider({
   const totalNumberOfresults = jobItems?.length || 0;
   const totalNumberOfPages = totalNumberOfresults / RESULTS_PER_PAGE;
 
-  const onPageChangeHandler = (directon: TPageDirection) => {
+  const onPageChangeHandler = useCallback((directon: TPageDirection) => {
     if (directon === "next") {
       setCurrentPage((prev) => prev + 1);
     } else if (directon === "previous") {
       setCurrentPage((prev) => prev - 1);
     }
-  };
+  }, []);
 
-  const onSortByChangeHandler = (newSortByOption: TSortingOption) => {
-    setCurrentPage(1);
-    setSortBy(newSortByOption);
-  };
+  const onSortByChangeHandler = useCallback(
+    (newSortByOption: TSortingOption) => {
+      setCurrentPage(1);
+      setSortBy(newSortByOption);
+    },
+    []
+  );
+
+  const contextValue = useMemo(
+    () => ({
+      currentPage,
+      sortBy,
+      isLoading,
+      jobItemsSliced,
+      totalNumberOfresults,
+      totalNumberOfPages,
+      onPageChangeHandler,
+      onSortByChangeHandler,
+    }),
+    [
+      currentPage,
+      sortBy,
+      isLoading,
+      jobItemsSliced,
+      totalNumberOfresults,
+      totalNumberOfPages,
+      onPageChangeHandler,
+      onSortByChangeHandler,
+    ]
+  );
   return (
-    <JobDataContext.Provider
-      value={{
-        currentPage,
-        sortBy,
-        isLoading,
-        jobItemsSliced,
-        totalNumberOfresults,
-        totalNumberOfPages,
-        onPageChangeHandler,
-        onSortByChangeHandler,
-      }}
-    >
+    <JobDataContext.Provider value={contextValue}>
       {children}
     </JobDataContext.Provider>
   );
